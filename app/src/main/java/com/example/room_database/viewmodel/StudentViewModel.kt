@@ -16,9 +16,9 @@ class StudentViewModel : ViewModel() {
 
     val studentList: LiveData<List<Students>> = repository.students
 
-    fun add(name: String, age: Int) {
+    fun add(name: String, age: Int, dob: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addStudent(Students(name = name, age = age))
+            repository.addStudent(Students(name = name, age = age, dob = dob ))
         }
     }
 

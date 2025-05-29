@@ -4,6 +4,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.room_database.Entity.Students
 import com.example.room_database.databinding.ActivityStudentAdapterBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class StudentAdapter(
     private var studentList: List<Students>,
@@ -25,7 +28,7 @@ class StudentAdapter(
         val student = studentList[position]
         holder.binding.textViewName.text = "Name: ${student.name}"
         holder.binding.textViewAge.text = "Age: ${student.age}"
-
+        holder.binding.textViewDob.text = "Dob: ${formatDate(student.dob)}"
         holder.binding.btnEdit.setOnClickListener {
             onEditClick(student)
         }
@@ -38,5 +41,13 @@ class StudentAdapter(
     fun updateList(newList: List<Students>) {
         studentList = newList
         notifyDataSetChanged()
+    }
+    private fun formatDate(timestamp: Long): String {
+        return if (timestamp == 0L) {
+            "Not Set"
+        } else {
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            sdf.format(Date(timestamp))
+        }
     }
 }

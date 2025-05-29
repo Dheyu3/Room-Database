@@ -10,7 +10,7 @@ import com.example.room_database.Entity.Students
 @Dao
 interface StudentDao {
 
-    @Query("SELECT * FROM  STUDENTS")
+    @Query("SELECT * FROM  STUDENTS ORDER BY ID DESC")
     fun getStudent(): LiveData<List<Students>>
 
     @Insert
